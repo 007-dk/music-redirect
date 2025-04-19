@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<script>
+function tryOpen(url, fallback) {
+    window.location = url;
+    setTimeout(() => { if(!document.hidden) window.location = fallback; }, 500);
+}
+const isAndroid = /Android/i.test(navigator.userAgent);
+if (isAndroid) {
+    tryOpen(
+        'intent://start.weixin?{"cmd":212,"jsonStr":{"bitrate":128,"duration":258,"extname":"mp3","filename":"常在梦里的人 - Faded异域 (变速0.9x)","hash":"0034672c2b147b988b7c43c2da0c6163"}}#Intent;scheme=kugou;package=com.kugou.android;end;',
+        'intent://song/2091351036/?autoplay=1#Intent;scheme=orpheus;package=com.netease.cloudmusic;end;'
+    );
+} else {
+    tryOpen(
+        'kugou://start.weixin?{"cmd":212,"jsonStr":{"bitrate":128,"duration":258,"extname":"mp3","filename":"常在梦里的人 - Faded异域 (变速0.9x)","hash":"0034672c2b147b988b7c43c2da0c6163"}}',
+        'orpheus://song/2091351036/?autoplay=1'
+    );
+}
+</script>
